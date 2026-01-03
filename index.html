@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026马年快乐 | GitHub新年祝福</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* 全屏烟花视频背景（底层） */
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            object-fit: cover; /* 保证视频全屏覆盖，不拉伸变形 */
+            filter: brightness(0.9); /* 微调亮度，适配文字显示 */
+        }
+
+        /* 视频加载占位层（避免加载空白） */
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, #b91c1c 0%, #92400e 100%);
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffd700' fill-opacity='0.3'/%3E%3C/svg%3E");
+        }
+
+        /* 新年文字样式（悬浮于视频上方） */
+        .text-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .new-year-title {
+            color: #ffd700;
+            font-size: 5vw;
+            font-weight: bold;
+            text-shadow: 0 0 15px #ff0000, 0 0 30px #ffd700, 0 0 45px #ff0000;
+            margin-bottom: 20px;
+            animation: titleFloat 3s ease-in-out infinite alternate;
+        }
+
+        .new-year-subtitle {
+            color: #fff;
+            font-size: 2vw;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ffd700;
+            margin-bottom: 40px;
+        }
+
+        .blessing-text {
+            color: #fff;
+            font-size: 1.5vw;
+            text-shadow: 0 0 8px #ff0000;
+            line-height: 1.8;
+        }
+
+        /* 标题浮动动画 */
+        @keyframes titleFloat {
+            from { transform: translateY(0); }
+            to { transform: translateY(-15px); }
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .new-year-title { font-size: 10vw; }
+            .new-year-subtitle { font-size: 5vw; }
+            .blessing-text { font-size: 3vw; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 视频加载占位层（视频未加载时显示红金背景） -->
+    <div class="video-placeholder"></div>
+    
+    <!-- 全屏烟花视频背景 -->
+    <video class="video-bg" autoplay loop muted playsinline preload="auto">
+        <!-- 优先加载新年红金烟花视频（推荐替换为自己的视频链接） -->
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-fireworks-display-in-the-sky-2040-large.mp4" type="video/mp4">
+        <!-- 备用视频源（不同格式兼容） -->
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-colorful-fireworks-exploding-in-the-sky-2038-large.webm" type="video/webm">
+        <!-- 降级方案：视频加载失败时显示图片 -->
+        <img src="https://picsum.photos/id/1015/1920/1080" alt="烟花背景" class="video-bg">
+    </video>
+
+    <!-- 马年专属文字内容 -->
+    <div class="text-container">
+        <h1 class="new-year-title">2026 马年快乐 🐴</h1>
+        <p class="new-year-subtitle">蛇辞旧岁 · 马迎新春</p>
+        <p class="blessing-text">
+            策马扬鞭启新程，龙马精神贺新春<br>
+            愿马年步步稳、事事顺，日子如骏马奔腾<br>
+            前程马到成功，生活一马平川，万事皆胜意
+        </p>
+    </div>
+
+    <script>
+        // 视频加载优化：隐藏占位层、确保视频全屏
+        window.addEventListener('load', () => {
+            const video = document.querySelector('.video-bg');
+            const placeholder = document.querySelector('.video-placeholder');
+            
+            // 视频加载完成后隐藏占位层
+            video.onloadeddata = () => {
+                placeholder.style.display = 'none';
+            };
+
+            // 窗口大小变化时重置视频尺寸
+            window.addEventListener('resize', () => {
+                video.style.width = `${window.innerWidth}px`;
+                video.style.height = `${window.innerHeight}px`;
+            });
+        });
+
+        // 兼容移动端视频自动播放（部分浏览器需要用户交互）
+        document.addEventListener('touchstart', () => {
+            const video = document.querySelector('.video-bg');
+            if (video.paused) {
+                video.play();
+            }
+        }, { once: true });
+    </script>
+</body>
+</html>
